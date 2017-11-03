@@ -2,7 +2,6 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 var moment = require('moment');
-moment.locale = 'pl';
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -140,36 +139,36 @@ bot.on('ready', function (evt) {
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
-setInterval(function(){
-  var come_soon = [];
-  var already_alive = [];
-  bosses.forEach(function(boss){
-    var time = (Date.parse(boss.next) - Date.now())/1000;
-    logger.info(time);
-    if ( time < 1200 && time > 0 ){
-      var data = {
-        name: boss.name,
-        tod: time
-      }
-      come_soon.push(data);
-    }
-    if (time <=0 && time > -900){
-      already_alive.push(boss.name);
-    }
-    });
-    if (come_soon.length || already_alive.length){
-      bot.sendMessage({
-        to: "375747110873726976",
-        message:
-          "Rb incoming: "
-          // come_soon.forEach();
-          +"Already fucking alive: "+
-          already_alive.forEach(function(alive){
-            +alive;
-          })
-      });
-    }
-}, 20000);
+// setInterval(function(){
+//   var come_soon = [];
+//   var already_alive = [];
+//   bosses.forEach(function(boss){
+//     var time = (Date.parse(boss.next) - Date.now())/1000;
+//     logger.info(time);
+//     if ( time < 1200 && time > 0 ){
+//       var data = {
+//         name: boss.name,
+//         tod: time
+//       }
+//       come_soon.push(data);
+//     }
+//     if (time <=0 && time > -900){
+//       already_alive.push(boss.name);
+//     }
+//     });
+//     if (come_soon.length || already_alive.length){
+//       bot.sendMessage({
+//         to: "375747110873726976",
+//         message:
+//           "Rb incoming: "
+//           // come_soon.forEach();
+//           +"Already fucking alive: "+
+//           already_alive.forEach(function(alive){
+//             +alive;
+//           })
+//       });
+//     }
+// }, 20000);
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
